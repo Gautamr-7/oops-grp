@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar to match the theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111827; /* bg-gray-900 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563; /* bg-gray-600 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* bg-gray-500 */
+        }
+        /* Style for date and time input icons */
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-gray-800 shadow-lg rounded-2xl p-6 md:p-8">
+            
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-white">Create a New Event</h1>
+                <p class="text-lg text-gray-400 mt-2">Fill in the details below to submit your event for review.</p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="hidden bg-green-500/20 border border-green-500 text-green-300 px-4 py-3 rounded-lg relative mb-6 text-center" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">Your event has been submitted for review.</span>
+            </div>
+
+            <form id="eventForm" class="space-y-8">
+                
+                <!-- Section: Event Information -->
+                <div>
+                    <h2 class="text-xl font-semibold text-white mb-6 border-b border-gray-700 pb-3">Event Information</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="eventTitle" class="block mb-2 text-sm font-medium text-gray-300">Event Title <span class="text-red-500">*</span></label>
+                            <input type="text" id="eventTitle" name="eventTitle" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="e.g., Innovate & Create Hackathon" required>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="eventDate" class="block mb-2 text-sm font-medium text-gray-300">Event Date <span class="text-red-500">*</span></label>
+                                <input type="date" id="eventDate" name="eventDate" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" required>
+                            </div>
+                            <div>
+                                <label for="eventTime" class="block mb-2 text-sm font-medium text-gray-300">Event Time <span class="text-red-500">*</span></label>
+                                <input type="time" id="eventTime" name="eventTime" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="eventLocation" class="block mb-2 text-sm font-medium text-gray-300">Event Location <span class="text-red-500">*</span></label>
+                            <input type="text" id="eventLocation" name="eventLocation" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="e.g., Main Auditorium" required>
+                        </div>
+                        
+                        <div>
+                            <label for="eventDescription" class="block mb-2 text-sm font-medium text-gray-300">Event Description <span class="text-red-500">*</span></label>
+                            <textarea id="eventDescription" name="eventDescription" rows="4" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Provide a detailed description of your event..." required></textarea>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="eventCategory" class="block mb-2 text-sm font-medium text-gray-300">Event Category <span class="text-red-500">*</span></label>
+                                <select id="eventCategory" name="eventCategory" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" required>
+                                    <option value="">Select a category</option>
+                                    <option value="academic">Academic</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="technical">Technical</option>
+                                    <option value="sports">Sports</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="seminar">Seminar</option>
+                                    <option value="competition">Competition</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="expectedAttendees" class="block mb-2 text-sm font-medium text-gray-300">Maximum Limit</label>
+                                <input type="number" id="expectedAttendees" name="expectedAttendees" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Max number of attendees" min="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Organizer Details -->
+                <div>
+                    <h2 class="text-xl font-semibold text-white mb-6 border-b border-gray-700 pb-3">Organizer Details</h2>
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                           <div>
+                                <label for="organizerName" class="block mb-2 text-sm font-medium text-gray-300">Organizer Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="organizerName" name="organizerName" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Your full name" required>
+                            </div>
+                            <div>
+                                <label for="organization" class="block mb-2 text-sm font-medium text-gray-300">Organization/Department <span class="text-red-500">*</span></label>
+                                <input type="text" id="organization" name="organization" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="e.g., CS Department" required>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="organizerEmail" class="block mb-2 text-sm font-medium text-gray-300">Email Address <span class="text-red-500">*</span></label>
+                                <input type="email" id="organizerEmail" name="organizerEmail" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="you@example.com" required>
+                            </div>
+                            <div>
+                                <label for="organizerPhone" class="block mb-2 text-sm font-medium text-gray-300">Phone Number <span class="text-red-500">*</span></label>
+                                <input type="tel" id="organizerPhone" name="organizerPhone" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="+91 98765 43210" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Additional Requirements -->
+                <div>
+                    <h2 class="text-xl font-semibold text-white mb-6 border-b border-gray-700 pb-3">Additional Requirements</h2>
+                     <div class="space-y-6">
+                        <div>
+                            <label for="additionalNotes" class="block mb-2 text-sm font-medium text-gray-300">Additional Notes</label>
+                            <textarea id="additionalNotes" name="additionalNotes" rows="4" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Any special requirements or extra information..."></textarea>
+                        </div>
+                     </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                     <button type="submit" class="w-full text-center py-3 px-4 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md transition-transform transform hover:scale-105 duration-300">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.remove('hidden');
+            
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+                this.reset();
+                successMessage.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Set minimum date to today for the date picker
+        document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+
+        // Basic phone number formatting (optional)
+        document.getElementById('organizerPhone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d+]/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
